@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="report_profile_partner"
+            string="Profile"
+            model="res.partner"
+            report_type="qweb-pdf"
+            file="res.partner"
+            name="latihan1.partner_profile"
+        />
+
+
+        <template id="partner_profile">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="latihan1.partner_profile_document"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="partner_profile_document">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h1>Profile Customer</h1>
+                    <p>Name: <span t-field="doc.name" /></p>
+                    Address: <span t-field="doc.street" />
+                    <span t-field="doc.city" /> <br/>
+                    <span t-field="doc.state_id" />
+                    <span t-field="doc.kota_id" />
+                    <br/>
+
+
+                    <table class="table">
+
+                        <tr>
+                            <th>Bank</th>
+                            <th>Account Number</th>
+                        </tr>
+
+                        <tr t-foreach="doc.bank_ids" t-as="bank">
+                            <td><span t-field="bank.bank_id" /></td>
+                            <td><span t-field="bank.acc_number" /></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>
